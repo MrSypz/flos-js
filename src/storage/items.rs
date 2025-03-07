@@ -4,7 +4,6 @@ use sqlx::{query_as, query};
 use sqlx::Error;
 
 pub async fn fetch_items(db: &Database) -> Result<Vec<Item>, Error> {
-    // PostgreSQL uses $1, $2, etc. for parameters, which is already correct in your code
     let items = query_as!(
         Item,
         "SELECT id, name, description FROM items"
