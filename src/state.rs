@@ -1,13 +1,12 @@
 use crate::storage::database::Database;
-use std::sync::Arc;
 
 #[derive(Clone)]
 pub struct AppState {
-    pub db: Arc<Database>,
+    pub db: Database,
 }
 
 impl AppState {
     pub fn new(db: Database) -> Self {
-        Self { db: Arc::new(db) }
+        Self { db }
     }
 }
