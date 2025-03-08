@@ -1,9 +1,9 @@
 mod app;
-mod config;
+mod state;
 mod receive;
 mod send;
-mod state;
 mod storage;
+mod config;
 
 use crate::app::create_app;
 use config::Config;
@@ -17,7 +17,11 @@ async fn main() {
     let config = Config::from_env();
     let app = create_app(config.database_url.clone()).await.unwrap();
 
-    let addr = SocketAddr::new(config.host.parse().expect("Invalid host"), config.port);
+    let addr = SocketAddr::new(
+        config.host.parse().expect("Invalid host"),
+        config.port,
+    );
+
     info!("Listening on {}", addr);
 
     axum::Server::bind(&addr)
